@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import GridCard from './components/GridCard';
 import * as GithubAPI from './backend/GithubAPI';
+import Table from './components/Table';
 
 class App extends Component {
 
@@ -19,10 +19,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <GridCard
-          users={users}
+        <Table
+          rows={users}
         />
       </div>
+
+
     );
   }
 }

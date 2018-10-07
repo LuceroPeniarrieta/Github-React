@@ -23,8 +23,12 @@ const styles = {
 
 class MediaCard extends Component {
 
+    goTo(url) {
+        window.open(url, '_blank');
+    }
+
     render() {
-        const { classes, avatar, username } = this.props
+        const { classes, avatar, username, github } = this.props
       
         return (
           <Card className={classes.card}>
@@ -40,7 +44,7 @@ class MediaCard extends Component {
             </CardActionArea>
             <CardActions>
                 <IconButton className={classes.button} aria-label="Delete">
-                    <LinkIcon />
+                    <LinkIcon onClick={()=> this.goTo(github)}/>
                 </IconButton>
                 <IconButton className={classes.button} aria-label="Delete">
                     <BoxIcon />

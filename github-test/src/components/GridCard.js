@@ -7,30 +7,24 @@ import Card from './Card';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
+  }
 });
 
 class GridCard extends Component {
 
   render() {
-    const { classes, users } = this.props;
+    const { classes, items } = this.props;
 
     return (
-      <Grid container className={classes.root} spacing={16}>
-        <Grid item xs={12}>
-          <Grid container className={classes.demo} justify="center" spacing={Number(16)}>
-            {users.map( user => (
-                <li key={user.id}>
+      <Grid container className={classes.root} spacing={24}>
+        <Grid item xs={9}>
+          <Grid container className={classes.demo} justify="center" spacing={24}>
+            {items.map( item => (
+                <li key={item.id}>
                     <Card
-                        avatar={user.avatar_url}
-                        username={user.login}
+                        avatar={item.avatar_url}
+                        username={item.login}
+                        github={item.html_url}
                     />
                 </li>
             ))}
