@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import * as GithubAPI from './backend/GithubAPI';
 import Table from './components/Table';
 import Repository from './pages/Repository';
@@ -7,9 +7,7 @@ import Repository from './pages/Repository';
 class App extends Component {
 
   state = {
-    username: '',
-    users: [],
-    repos: []
+    users: []
   }
 
   componentDidMount() {
@@ -18,31 +16,22 @@ class App extends Component {
     })
   }
 
-  getRepos = (username) => {
-    GithubAPI.getRepos(username).then((repos) => {
-        this.setState({ repos, username })
-    })
-  }
-
   render() {
-    const { username, users, repos } = this.state
+    const { users } = this.state
 
     return (
       <div className="App">
-        <Route exact path='/users/:username/repos' render={() => (
-          <Repository
-            repos={this.getRepos}
-            user_name={username}
-            list_repos={repos}
-            users_component={false}
-          />
-        )}/>
-        <Route exact path='/' render={() => (
-          <Table
-            rows={users}
-            users_component={true}
-          />
-        )}/>
+        <BrowserRouter>
+          <Switch>
+            <Route path='/users/:username/repos' component={Repository}/>
+            <Route exact path='/' render={() => (
+              <Table
+                rows={users}
+                users_component={true}
+              />
+            )}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

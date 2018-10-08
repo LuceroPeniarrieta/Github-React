@@ -64,7 +64,7 @@ class MediaCard extends Component {
                     </IconButton>
                     <IconButton className={classes.button} aria-label="Delete">
                         <BoxIcon />
-                        <Link to={user_repo} params={{ username: username}}>Repos</Link>
+                        <Link to={user_repo}>Repos</Link>
                     </IconButton>
                 </CardActions>
             )}

@@ -1,20 +1,30 @@
 
 import React, { Component } from 'react'
+import * as GithubAPI from '../backend/GithubAPI';
 import Table from '../components/Table';
 
 class Repository extends Component {
 
-    componentDidMount() {
-        this.props.repos('mojombo')
+    state = {
+        repositories: []
+    }    
+    
+    getRepos = async(username) => {
+        return await GithubAPI.getRepos(username)
+    }
+
+    async componentDidMount() {
+        const repos = await this.getRepos(this.props.match.params.username)
+        this.setState({ repositories: repos })
     }
  
     render() {
-        const { list_repos, users_component } = this.props
-        
+        const { users_component } = this.props
+
         return (
             <div> 
                 <Table
-                    rows={list_repos}
+                    rows={this.state.repositories}
                     users_component={users_component}
                 />
             </div>

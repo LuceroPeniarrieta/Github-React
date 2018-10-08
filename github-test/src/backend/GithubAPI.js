@@ -1,9 +1,5 @@
 const api = "https://api.github.com"
 
-let token = localStorage.token
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
-
 const headers = {
   'Content-Type': 'application/json'
 }

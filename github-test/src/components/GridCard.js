@@ -14,7 +14,6 @@ class GridCard extends Component {
 
   render() {
     const { classes, items, users_component } = this.props;
-    console.log('GRIDCARD', this.props)
 
     return (
       <Grid container className={classes.root} spacing={24}>
