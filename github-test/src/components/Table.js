@@ -124,7 +124,7 @@ class CustomPaginationActionsTable extends Component {
 
   render() {
     var row_grid = []
-    const { classes, rows } = this.props;
+    const { classes, rows, users_component } = this.props;
     const { rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -138,6 +138,7 @@ class CustomPaginationActionsTable extends Component {
               })}
               <GridCard
                 items={row_grid}
+                users_component={users_component}
               />
               {emptyRows > 0 && (
                 <TableRow style={{ height: 48 * emptyRows }}>

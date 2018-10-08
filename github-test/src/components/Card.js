@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -28,28 +29,45 @@ class MediaCard extends Component {
     }
 
     render() {
-        const { classes, avatar, username, github } = this.props
+        const { classes, 
+                avatar, username, github, users_component,
+                repo_name, repo_description, open_issues, forks_count } = this.props
+        var user_repo = `/users/${username}/repos`
       
         return (
           <Card className={classes.card}>
             <CardActionArea>
-              <CardMedia className={classes.media}
-                image={avatar}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="headline" component="h2">
-                {username}
-                </Typography>
-              </CardContent>
+              {users_component  &&  (
+                <CardMedia className={classes.media} image={avatar}/>
+              )}
+
+              {users_component ? (
+                <CardContent>
+                    <Typography gutterBottom variant="headline" component="h2">
+                    {username}
+                    </Typography>
+                </CardContent>
+              ) : (
+                <CardContent>
+                    <Typography component="p">Name: {repo_name}</Typography>
+                    <Typography component="p">Description: {repo_description}</Typography>
+                    <Typography component="p">Open Issues: {open_issues}</Typography>
+                    <Typography component="p">Forks: {forks_count}</Typography>
+                </CardContent>
+              )}
             </CardActionArea>
-            <CardActions>
-                <IconButton className={classes.button} aria-label="Delete">
-                    <LinkIcon onClick={()=> this.goTo(github)}/>
-                </IconButton>
-                <IconButton className={classes.button} aria-label="Delete">
-                    <BoxIcon />
-                </IconButton>
-            </CardActions>
+
+            {users_component && (
+                <CardActions>
+                    <IconButton className={classes.button} aria-label="Delete">
+                        <LinkIcon onClick={()=> this.goTo(github)}/>
+                    </IconButton>
+                    <IconButton className={classes.button} aria-label="Delete">
+                        <BoxIcon />
+                        <Link to={user_repo} params={{ username: username}}>Repos</Link>
+                    </IconButton>
+                </CardActions>
+            )}
           </Card>
         );
       }
